@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>login page validation </title>
+	<!-- css starts from here -->
+	<style type="text/css">
+@media only screen and (min-width: 320px),screen and (min-height: 100%) {
+	body{
+
+		background-image:url("background image 2.jpg");
+		  background-position: center;
+ 	      background-repeat: no-repeat;
+          background-size: cover;
+          height: 100%;
+
+	}
+		.ss{
+			padding: 90px;
+			margin: 100px;
+			background-color: #98AFC7;
+
+			border-radius: 20px;
+			width: 250px;
+			font-size: 20px;
+
+	}
+	}
+	.txtclr{
+		color: black;
+	}
+
+		.custom_nav_bar{
+			width: 100%;
+			height: 70px;
+			background-color:cadetblue;
+			position: fixed;
+			 top: 0;
+			margin-left: -7px;
+	    	margin-right: -7px;
+		}
+		.nav_login{
+			color: white;
+			font-size: 20px;
+			padding-top: 10px;
+	    	padding-left: 85%
+		}
+		.submit_button{
+			font-size: 40px;
+			background-color: blanchedalmond;
+			border-radius: 60px ;
+			color: black;
+		}
+		.submit_button:hover{
+			color: red;
+			background-color: #843cc5;
+			cursor: pointer;
+		}
+		.custom_footer{
+			width: 100%;
+			height:70px ;
+			background-color: cadetblue;
+			position: fixed;
+			bottom: 0;
+			margin-left: -7px;
+	    	margin-right: -7px;
+		}
+		.footer_text{
+			color: white ;
+			font-size: 50px;
+			padding-top: 25px;
+			padding-left: 80%;
+		}
+	img{
+		border-radius: 50%;
+	}
+
+}
+	</style>
+
+	
+</head>
+<body style="">
+	<header>
+		<nav class="custom_nav_bar">
+			<div class="nav_login"><a href="A:\Front-end\shrabanti\signUp_page.html"><span style="color:white;">Go to Sign-Up Page</span></a></div>
+		</nav>
+	</header>
+	<center>
+		<div class="ss">
+			<img src="login.jpg" width="140px">
+		<form action="b.html" method="post" enctype="multipart/form-data">
+			<level class="txtclr"></level>Username: <input id="name" type="text" name="" placeholder="Enter Username"><br><br>
+			<level class="txtclr"></level>Password: <input id= "password" type="text" name="" placeholder="password"><br><br>
+			<input type="submit" name="" value="login" class="submit_button" onclick="login_validation()">
+		</form >
+
+		</div>
+	</center>
+	<footer>
+		<div class="custom_footer"><a href="#"><i><u style="color: antiquewhite;">www.oursite.com</u></i></a></div>
+	</footer>
+</body>
+
+<script type="text/javascript">
+	
+	function login_validation() {
+		var uname = document.getElementById('name');
+		var filter = /^[a-zA-Z]$/;
+		var psswrd = document.getElementById('password');
+
+
+
+		if(uname==""){
+           alert('Please put Your Username');
+           return false;
+        }
+        if(!filter.test(uname.value))
+        {
+        	//document.getElementById('mid').innerHTML = "";
+        	alert('Name should be character only');
+        	return false;
+        }
+        if(filter.test(uname.value))
+        {
+        	//document.getElementById('mid').innerHTML = "";
+        	alert('name is ok');
+        }
+
+        if (psswrd.match(/[a-z]/g) && psswrd.match(/[A-Z]/g) && psswrd.match(/[0-9]/g) && psswrd.match(/[^a-zA-Z\d]/g) && psswrd.length >= 8){
+        		res = true;
+        }
+        else
+        {
+        	res = false;
+        	alert('put pssword in the proper');
+        }
+
+	}
+</script>
+</html>

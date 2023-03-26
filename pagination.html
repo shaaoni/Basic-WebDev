@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Pagination</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+  <style type="text/css">
+  
+
+  </style>
+</head>
+<body>
+  <center>
+    <p>
+      <h1> Javascript Pagination</h1>
+    </p>
+  <br><br>
+  <!-- <input type="text" name="" id="record" placeholder="List per page" class="form-control py-2 border-left-0 border" > -->
+
+
+  <table id="listingTable" class="table table-striped">
+    <thead>
+      <tr>
+        <td><h1>Name</h1></td>
+        <td><h1>Age</h1></td>
+        <td><h1>Country</h1></td>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr>
+        <td>Ayushman</td>
+        <td>35</td>
+        <td>India</td>
+      </tr>
+
+      <tr>
+        <td>Anthony</td>
+        <td>36</td>
+        <td>England</td>
+      </tr>
+
+      <tr>
+        <td>Surajit</td>
+        <td>33</td>
+        <td>India</td>
+      </tr>
+
+      <tr>
+        <td>Akbar</td>
+        <td>30</td>
+        <td>Afghanistan</td>
+      </tr>
+
+      <tr>
+        <td>Aman</td>
+        <td>32</td>
+        <td>Canada</td>
+      </tr>
+
+      <tr>
+        <td>Sakib</td>
+        <td>34</td>
+        <td>Bangladesh</td>
+      </tr>
+
+      <tr>
+        <td>Kaka</td>
+        <td>45</td>
+        <td>Brazil</td>
+      </tr>
+
+      <tr>
+        <td>Ronaldo</td>
+        <td>35</td>
+        <td>Ireland</td>
+      </tr>
+
+      <tr>
+        <td>Messi</td>
+        <td>40</td>
+        <td>Argentina</td>
+      </tr>
+
+      <tr>
+        <td>Maradona</td>
+        <td>50</td>
+        <td>Argentina</td>
+      </tr>
+
+      <tr>
+        <td>Sachin</td>
+        <td>35</td>
+        <td>India</td>
+      </tr>
+    </tbody>
+
+  </table>
+
+  </center>
+
+
+  <nav aria-label="Page navigation example" style="text-align: center;">
+  <ul class="pagination">
+    <li class="page-item"><a class="page-link" href="#" onclick="prePage()" id="prev">Previous</a></li>
+    <!-- <li class="page-item"><a class="page-link" href="#">1</a></li>
+    <li class="page-item"><a class="page-link" href="#">2</a></li>
+    <li class="page-item"><a class="page-link" href="#">3</a></li> -->
+    <li class="page-item"><a class="page-link" href="#" onclick="nextPage()" id="next">Next</a></li>
+  </ul>
+  page: <span id="page"></span>
+</nav>
+
+
+</body>
+
+<script type="text/javascript">
+  var currentPage = 1;
+  var record = 2;
+  var t = document.getElementById("listingTable").rows.length;
+
+
+function prePage(){
+  if(currentPage>1){
+      currentPage--;
+      changePage(currentPage);
+  }
+}
+
+function nextPage(){
+  if(currentPage<totalPage()){
+    currentPage++;
+    changePage(currentPage);
+  }
+}
+
+function changePage(page){
+  var prev = document.getElementById('prev');
+  var next = document.getElementById('next');
+  var tableElement = document.getElementById('listingTable');
+  var pageSpan = document.getElementById('page');
+
+    if(page<1) page=1;
+    if(page>totalPage) page=totalPage();
+
+    [...listingTable.getElementsByTagName('tr')].forEach((tr)=>{
+      tr.style.display="none";
+    });
+    listingTable.rows[0].style.display = "";
+
+    for(var i=(page-1)*record+1;i<(page*record+1);i++){
+      if(listingTable.rows[i]){
+        listingTable.rows[i].style.display="";
+      }else{
+        continue;
+      }
+    }
+
+    pageSpan.innerHTML = page +"/"+totalPage();
+
+    if(page==1){
+      prev.style.visibility= "hidden";
+    }else{
+      prev.style.visibility= "visible";
+    }
+
+    if(page==totalPage()) {
+      next.style.visibility= "hidden";
+    }else{
+      next.style.visibility= "visible";
+    }
+}
+
+function totalPage(){
+      return Math.ceil((t-1)/record);
+}
+
+window.onload = function (){
+      changePage(currentPage);
+};
+
+
+
+</script>
+</html>

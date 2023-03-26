@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>GST_calculation</title>
+	<style type="text/css">
+		.f1{
+			border: 5px solid black;
+			
+		}
+
+		.box{
+			/*border: 1px solid red;*/
+			/*padding: 10px;*/
+			/*height: 10px;
+			width: 50px;*/
+			position: static;
+
+		}
+	</style>
+</head>
+<body>
+
+<center>
+	<label><h2>Please Fill the Following Information</h2></label>
+	<br><br>
+	<nav>
+	<form class="f1" onsubmit= "return  test()" >
+		<label>Customer Name: </label><input type="text" name="Customer_name" id="cname"><br>
+		<span id="cname_err" style="color: red ;font-size: 25px;"></span>
+		<br><br>
+		<label>Product Name: </label><input type="text" name="Product" id= "prd_name"><br>
+		<span id="prd_name_err" style="color: red ;font-size: 25px;"></span>
+		<br><br>
+		<label>Number of Product: </label><input type="text" name="Number" id="prd_no"><br><br>
+		<label>Price per product: </label><input type="text" name="prc" id="prd_prc"><br><br>
+
+
+		<input type="submit" name="SUBMIT" value="SUBMIT"><br><br>
+
+		<label>Amount: </label><div class="box" id="amnt" ></div><!-- <input type="text" name="amount" id="amnt"> --><br><br>
+
+		<label>Total Discount: </label><div class="box" id="disc" ></div><!-- <input type="text" name="discount" id="disc"> --><br><br>
+
+		<label>Total Amount: </label><div class="box" id="T_Amount" ></div><!-- <input type="text" name="t_amount" id="T_Amount"> --><br><br>
+
+		<label>C-GST(9%): </label><div class="box" id="cgst" ></div><!-- <input type="text" name="t_amount" id="T_Amount"> --><br><br>
+
+		<label>S-GST(12%): </label><div class="box" id="sgst" ></div><!-- <input type="text" name="t_amount" id="T_Amount"> --><br><br>
+
+	</form>
+	</nav>
+</center> 
+	
+<script type="text/javascript" >
+
+	function test()
+	{
+
+		var cstm=document.getElementById('cname').value;
+		var prd_nm=document.getElementById('prd_name').value;
+		var price_item = document.getElementById('prd_prc').value; ;
+		//console.log(price_item);
+		var pr_no = document.getElementById('prd_no').value;
+		var total_price;
+		var price = pr_no*price_item;
+		var extra_elmnt= pr_no%5;
+		var cgs;
+		var sgs;
+
+		
+		if(cstm === ""|| cstm === 0){
+			document.getElementById('cname_err').innerHTML="Put Customer's name";
+			//document.write("put ur name");
+			return false;
+		}
+
+		else if(cstm){
+				document.getElementById('cname_err').innerHTML="";
+				//document.write("name ok");
+		}
+
+		if(prd_nm==="" || prd_nm===0 ){
+				document.getElementById('prd_name_err').innerHTML="Put Product's name";
+				return false;
+		}
+
+		else if(prd_nm){
+				document.getElementById('prd_name_err').innerHTML="";
+		}
+
+		if(pr_no <=4){
+			
+			document.getElementById("disc").innerHTML="No Discount";
+			price = pr_no*price_item;
+	 		document.getElementById("amnt").innerHTML= price;
+	 		document.getElementById("T_Amount").innerHTML=price;
+	 		//document.write(price);
+	 		//console.log(price_item);
+	 		cgs = price+(price*(9/100));
+	 		document.getElementById("cgst").innerHTML=cgs;
+	 		sgs= price+(price*(12/100));
+	 		document.getElementById("sgst").innerHTML=sgs;
+	 		return false;
+	 		
+		}
+
+		if(pr_no==5){
+			console.log(price_item);
+			document.getElementById("disc").innerHTML="10%";
+			total_price = pr_no*price_item - (pr_no*price_item*10)/100;
+			document.getElementById("T_Amount").innerHTML = total_price;
+			price = pr_no*price_item;
+			document.getElementById("amnt").innerHTML=price;
+
+			cgs = total_price+(total_price*(9/100));
+	 		document.getElementById("cgst").innerHTML=cgs;
+	 		sgs= total_price+(total_price*(12/100));
+	 		document.getElementById("sgst").innerHTML=sgs;
+			return false;
+		}
+
+		if(pr_no>5 && pr_no<10){
+			//console.log(price_item);
+			document.getElementById("disc").innerHTML="10% discount for 5 products";
+			//price = pr_no*price_item;
+			document.getElementById("amnt").innerHTML=price;
+	
+			total_price = 5*price_item - (5*price_item*10)/100 + extra_elmnt* price_item;
+			document.getElementById("T_Amount").innerHTML = total_price;
+			cgs = total_price+(total_price*(9/100));
+	 		document.getElementById("cgst").innerHTML=cgs;
+	 		sgs= total_price+(total_price*(12/100));
+	 		document.getElementById("sgst").innerHTML=sgs;
+
+			return false;
+		}
+		
+		if(pr_no==10){
+			//console.log(price_item);
+			document.getElementById("disc").innerHTML="15%";
+			total_price = pr_no*price_item - (pr_no*price_item*15)/100;
+			document.getElementById("T_Amount").innerHTML = total_price;
+			//price = pr_no*price_item;
+			//document.getElementById("amnt").innerHTML=price;
+
+			cgs = total_price+(total_price*(9/100));
+	 		document.getElementById("cgst").innerHTML=cgs;
+	 		sgs= total_price+(total_price*(12/100));
+	 		document.getElementById("sgst").innerHTML=sgs;
+			return false;
+		}
+
+		if(pr_no>10){
+			//console.log(price_item);
+			document.getElementById("disc").innerHTML="15% discount for 10 products";
+			//price = pr_no*price_item;
+			document.getElementById("amnt").innerHTML=price;
+	
+			total_price = 10*price_item - (10*price_item*15)/100 + extra_elmnt* price_item;
+			document.getElementById("T_Amount").innerHTML = total_price;
+
+			cgs = total_price+(total_price*(9/100));
+	 		document.getElementById("cgst").innerHTML=cgs;
+	 		sgs= total_price+(total_price*(12/100));
+	 		document.getElementById("sgst").innerHTML=sgs;
+			return false;
+		}
+	 } 
+
+</script>
+
+</body>
+</html>
